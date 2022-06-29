@@ -21,7 +21,7 @@ if __name__ == '__main__':
     dups_id=[ i.emp_id for i in id_counts.collect()]
     # data with duplicate ids and write into S3 location path defined
     dup_id_data_df = cleanInputDF.filter(func.col('emp_id').isin(dups_id))
-    dup_id_data_df.write.foramt("csv").optio('Header',True).save('s3a://pysparkop/output/dup_emp.csv',mode='overwrite')
+    dup_id_data_df.write.foramt("csv").option('Header',True).save('s3a://pysparkop/output/dup_emp.csv',mode='overwrite')
     # data with non duplicate ids and write into output s3 location
     non_dup_id_df = cleanInputDF.filter(func.col('emp_id').isin(dups_id) == False)
     non_dup_id_df.write.format('csv').option('Header',True).save('s3a://pysparkop/output/non_dup_emp.csv',mode='overwrite')
