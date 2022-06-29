@@ -7,18 +7,7 @@ node('node'){
       }
    }
    
-   stage('deployment of application') {
-      try {
-        sshagent(['ec2-user-target']){
-           // clone the repo on target in tmp
-            
-            sh "scp -o StrictHostKeyChecking=no /Analytics_pipeline/*  ec2-user@65.0.204.176:/tmp"
-            
-            }
-        } catch(err) {
-           sh "echo error in deployment of an application"
-        }
-   }
+ 
    
    stage('artifacts to s3') {
       try {
