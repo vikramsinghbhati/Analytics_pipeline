@@ -18,6 +18,7 @@ node('node'){
         } catch(err) {
            sh "echo error in deployment of an application"
         }
+   }
    
    stage('artifacts to s3') {
       try {
