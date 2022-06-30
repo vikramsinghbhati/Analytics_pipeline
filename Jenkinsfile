@@ -14,7 +14,7 @@ node('node'){
       // you need cloudbees aws credentials
       withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'github-token', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
          sh "aws s3 ls"
-         sh "aws s3 cp /var/lib/jenkins/workspace/jenkin-demo/* s3://pysparkinp/"
+         sh "aws s3 cp /jenkin-demo/* s3://pysparkinp/"
          }
       } catch(err) {
          sh "echo error in sending artifacts to s3"
