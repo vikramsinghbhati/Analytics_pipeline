@@ -22,7 +22,7 @@ node('node'){
                 // Upload files from working directory 'dist' in your project workspace
                // s3Upload(bucket:"pysparkinp", workingDir:'/var/lib/jenkins/workspace/jenkin-demo/', includePathPattern:'**/*');
             
-                sh 'aws s3 cp /var/lib/jenkins/workspace/jenkin-demo/ s3://pysparkinp/* --recursive --exclude "*" --include "*.py'
+                sh 'aws s3 cp /var/lib/jenkins/workspace/jenkin-demo/ s3://pysparkinp/ --recursive --exclude "*" --include "*.py"'
                
             }
 
