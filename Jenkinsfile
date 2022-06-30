@@ -11,7 +11,7 @@ node('node'){
    
    stage('artifacts to s3') {
       try {
-          dir('/var/lib/jenkins/workspace/Jenkin_demo_pipeline'){
+          dir('/var/lib/jenkins/workspace/Jenkin-demo/'){
 
             pwd(); //Log current directory
 
@@ -20,7 +20,7 @@ node('node'){
                  def identity=awsIdentity();//Log AWS credentials
 
                 // Upload files from working directory 'dist' in your project workspace
-                s3Upload(bucket:"pysparkinp", workingDir:'dist', includePathPattern:'**/*');
+                s3Upload(bucket:"pysparkinp", workingDir:'/var/lib/jenkins/workspace/Jenkin-demo/', includePathPattern:'**/*');
             }
 
         };
