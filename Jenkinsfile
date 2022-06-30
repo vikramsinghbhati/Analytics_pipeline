@@ -11,11 +11,19 @@ node('node'){
    
    stage('artifacts to s3') {
       try {
-      // you need cloudbees aws credentials
-      withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'github-token', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-         sh "aws s3 ls"
-         sh "aws s3 cp /jenkin-demo/ s3://pysparkinp --recursive --include "*" "
-         }
+          dir('/var/lib/jenkins/workspace/Jenkin_demo_pipeline'){
+
+            pwd(); //Log current directory
+
+            withAWS(region:'ap-south-1',credentials:'github-token') {
+
+                 def identity=awsIdentity();//Log AWS credentials
+
+                // Upload files from working directory 'dist' in your project workspace
+                s3Upload(bucket:"pysparkinp", workingDir:'dist', includePathPattern:'**/*');
+            }
+
+        };
       } catch(err) {
          sh "echo error in sending artifacts to s3"
       }
